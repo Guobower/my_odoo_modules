@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<record id="new_sale_details_report" model="ir.actions.report">-->
+        <!--<field name="name">Détails des ventes</field>-->
+        <!--<field name="model">report.rapport_detail_vente.report_saledetails</field>-->
+        <!--<field name="report_type">qweb-pdf</field>-->
+        <!--<field name="report_name">rapport_detail_vente.report_saledetails</field>-->
+    <!--</record>-->
+
+
+        <report
+            id="action_report_details_report"
+            model="report.rapport_detail_vente.report_saledetails"
+            string="Détails des ventes"
+            report_type="qweb-pdf"
+            name="rapport_detail_vente.report_saledetails"
+            file="rapport_detail_vente.report_saledetails"
+        />
+
+
+</odoo>
