@@ -1,0 +1,64 @@
+<odoo>
+    <record id="view_form_todo" model="ir.ui.view">
+        <field name="name">To-do Task Form</field>
+        <field name="model">tobin_todo.task</field>
+        <field name="arch" type="xml">
+            <form string="To-do Task">
+                <header>
+                    <button
+                    name="do_toggle_done"
+                    type="object"
+                    string="Basculer"
+                    class="oe_highlight"
+                    />
+                    <button
+                    name="do_clear_done"
+                    type="object"
+                    string="Supprimer Taches Effectuées"
+                    />
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="is_done"/>
+                            <field name="active" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_list_todo" model="ir.ui.view">
+        <field name="name">To-do Task Tree</field>
+        <field name="model">tobin_todo.task</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="is_done==True">
+                <field name="name"/>
+                <field name="is_done"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_filter_todo" model="ir.ui.view">
+        <field name="name">To-do Task Tree</field>
+        <field name="model">tobin_todo.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter
+                string="Pas fait"
+                domain="[('is_done','=',False)]"/>
+                <filter
+                string="Fait"
+                domain="[('is_done','=',True)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="report_barrecode_generator"
+        model="barcode_generator.barecode_register"
+        string="Imprimer Code Barre"
+        name="barcode_generator.report_barrecode_generator_view"
+        file="barcode_generator.report_barrecode_generator"
+        report_type="qweb-pdf"
+        menu="True"/>
+
+    <template id="report_barrecode_generator_view">
+        <t t-call="web.basic_layout">
+            <table border="1" style="width:100%; border: 1px solid black;">
+                <tr style="border: 1px solid black;">
+
+                <t t-set="i" t-value="1"/>
+                <t t-foreach="docs" t-as="doc">
+                    <td style="border: 1px solid black;">
+                                <t t-if="doc.barcode">
+                                    <div align="center" style="margin: 15px;" >
+                                        <img
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
+                                        ('Code128', doc.barcode, 600, 120)" style="max-height:50pt;max-width:100%;"/>
+                                        <p t-field="doc.barcode"/>
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <p>No barcode</p>
+                                </t>
+                    </td>
+
+                    <t t-if="i%2 == 0">
+                        <tr style="border: 1px solid black;">
+                        </tr>
+                    </t>
+
+                <t t-set="i" t-value="i+1"/>
+                </t>
+                </tr>
+            </table>
+        </t>
+    </template>
+
+
+    <!--Report par lot -->
+
+     <report
+        id="report_lot_barrecode_generator"
+        model="barcode_generator.lot_barecode_register"
+        string="Imprimer Lot Code Barre"
+        name="barcode_generator.report_lot_barrecode_generator_view"
+        file="barcode_generator.report_lot_barrecode_generator"
+        report_type="qweb-pdf"
+        menu="True"/>
+
+
+    <template id="report_lot_barrecode_generator_view">
+        <t t-call="web.basic_layout">
+            <table border="1" style="width:100%; border: 1px solid black;">
+                <tr style="border: 1px solid black;">
+
+                <t t-set="i" t-value="1"/>
+                <t t-foreach="docs.barcode_ids" t-as="doc">
+                    <td style="border: 1px solid black;">
+                                <t t-if="doc.barcode">
+                                    <div align="center" style="margin: 15px;" >
+                                        <img
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
+                                        ('Code128', doc.barcode, 600, 120)" style="max-height:50pt;max-width:100%;"/>
+                                        <p t-field="doc.barcode"/>
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <p>No barcode</p>
+                                </t>
+                    </td>
+
+                    <t t-if="i%2 == 0">
+                        <tr style="border: 1px solid black;">
+                        </tr>
+                    </t>
+
+                <t t-set="i" t-value="i+1"/>
+                </t>
+                </tr>
+            </table>
+        </t>
+    </template>
+
+</odoo>

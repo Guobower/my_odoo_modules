@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Record Zone -->
+    <record model="ir.actions.act_window" id="client_list_action">
+        <field name="name">Client</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Créer un nouveau client
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item Zone -->
+
+    <menuitem id="barre_code_main_menu" name="Code Barre Client"/>
+    <menuitem id="barre_code_client_menu" name="Client" parent="barre_code_main_menu"/>
+    <menuitem id="barre_code_configuration_menu" name="Configuration" parent="barre_code_main_menu"/>
+    <menuitem id="client_menu" name="Liste des Clients" parent="barre_code_client_menu" action="client_list_action"/>
+    <menuitem id="barre_code_client_configuration_menu" name="Nomenclatures de code-barre"
+              parent="barre_code_configuration_menu" action="barcodes.action_barcode_nomenclature_form"/>
+
+</odoo>

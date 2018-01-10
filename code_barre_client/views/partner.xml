@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="partner_loyalty_form_view">
+            <field name="name">partner.code_barre_client</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                     <xpath expr="//page[@name='sales_purchases']/group" position="after">
+                        <group string="Génération Code Barre" name="barcode_generation">
+
+                            <button string="Générer Code Barre" type="object" name="generate_client_record_barcode"/>
+                        </group>
+                    </xpath>
+                    <!--<xpath expr="//page[@name='sales_purchases']/group[@name='point_of_sale']/field[@name='barcode']" position="after">-->
+
+                            <!--<field name="barcode"/>-->
+                        <!---->
+                    <!--</xpath>-->
+
+            </field>
+        </record>
+
+
+    <record model="ir.actions.act_window" id="client_loyalty_list_action">
+            <field name="name">Client Fidèle</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+        <menuitem id="client_loyalty_menu" name="Client Fidèle"
+                  parent="code_barre_client.barre_code_configuration_menu"
+                  action="client_loyalty_list_action"/>
+
+
+</odoo>

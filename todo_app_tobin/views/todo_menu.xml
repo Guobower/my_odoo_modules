@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_todo_task" model="ir.actions.act_window">
+        <field name="name">Todo-Task</field>
+        <field name="res_model">tobin_todo.task</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+    name="Todos"
+    id="menu_todo_task"
+    action="action_todo_task"/>
+</odoo>
