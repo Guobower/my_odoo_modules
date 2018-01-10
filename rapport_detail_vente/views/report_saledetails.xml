@@ -101,6 +101,10 @@
                                     <span t-field="t.price_subtotal_incl"/>
                                 </td>
 
+                                 <td>
+                                    <span t-field="t.price_subtotal_incl"/>
+                                </td>
+
 
                                  <t t-foreach="t.tax_ids" t-as="s">
                                     <td>

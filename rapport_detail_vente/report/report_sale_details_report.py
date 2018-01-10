@@ -182,6 +182,19 @@ class ReportSaleDetails(models.AbstractModel):
             stat['nom'] = journal_name
             v_journals_stat.append(stat)
 
+        # TAXES UPDATES
+        taxes_stat = []
+        for line in order_line_dic:
+            montant_taxe = line.price_subtotal_incl - line.price_subtotal
+            montant_de_base = line.price_subtotal
+            line_taxes_name = []
+            # Un produit peut avoir plusieurs taxes donc la ligne de vente peut en avoir plusieurs aussi
+            for taxe in line.tax_ids:
+                line_taxes_name.append(taxe.name)
+            taxes_stat.append({"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": line_taxes_name})
+
+
+
         order_stats = []
         order_journal_stats = []
         for order_list in new_reorders:
