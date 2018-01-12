@@ -5,6 +5,36 @@
     <t t-call="web.internal_layout">
         <div class="page">
 
+            <style>
+                .mytable  {
+                    border-collapse: collapse;
+                    border: 1px solid #CCC;
+                    border-collapse: collapse
+
+                }
+                .mytable > tfoot {
+                    background-color: #e0e0e0;
+                    font-size:18px;
+                    font-weight:bold;
+                }
+                .mytable > thead > tr > th {
+                    border: 1px solid #CCC;
+                }
+                .mytable > td {
+                    border: none;
+                }
+                .mytable > tbody > tr > td {
+                    border: none;
+
+                }
+
+
+            </style>
+
+            <t t-call="entete_pied_page_marymarket.entete">
+
+            </t>
+
       <!-- entete-->
       <table style="width:100%; margin-top:15px">
        <tr>
@@ -138,22 +168,23 @@
     </t>
     <t t-else="">
 
-            <table style="border: 1px solid black;" class="table table-condensed" width="100%">
+            <table style="border: 1px solid black;" class="mytable table table-condensed" width="100%">
 
                     <thead>
                         <tr>
                             <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Catégorie POS
+                                CATEGORIE POS
                             </th>
-                            <th class="text-right">Total</th>
+                            <th class="text-right ; width:30% ">TOTAL</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr t-foreach="journal_stats" t-as="s">
-                            <td align="left" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Total des Ventes TTC
+                            <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+
+                                TOTAL DES VENTES TTC
                             </td>
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; vertical-align:middle; padding-right:5px">
+                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; vertical-align:middle; padding-right:5px">
                                 <span t-esc="s['totals']" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />
                             </td>
                         </tr>
@@ -161,7 +192,7 @@
                     <tbody>
                         <tr t-foreach="stats" t-as="a">
                             <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span t-esc="a['famille']" />
+                                <span class="text-lowercase" t-esc="a['famille']" />
                             </td>
                             <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="a['total']" t-options='{"widget": "monetary", "display_currency": a["currency"]}' />
@@ -172,16 +203,16 @@
             </table>
 
 
-            <div class="text-left">
 
-                <table style="border: 1px solid black;" class="table table-condensed" width="100%">
+
+                <table style="border: 1px solid black;" class="mytable table table-condensed" width="100%">
                     <thead>
                         <tr>
-                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-bottom:1px solid black; vertical-align:middle; padding-right:5px">
 
                             </th>
                             <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Montant Taxable
+                                MONTANT TAXABLE
                             </th>
                             <th>TVA</th>
 
@@ -197,8 +228,32 @@
                         <tr t-foreach="taxes_stat" t-as="s">
                             <t t-set="total_montant_de_base" t-value="total_montant_de_base + s['montant_de_base'] "/>
                             <t t-set="total_montant_de_taxe" t-value="total_montant_de_taxe + s['montant_taxe'] "/>
-                            <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black;  border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span t-esc="s['nom_taxes']" />
+                            <td class="text-left">
+                            <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black;  border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+
+                                <!-- Ce que je vais faire n'est pas jolie : BAD HACK -->
+                                <!--<t t-if="s['nom_taxes'] == 'TVA 18% (vente)'">-->
+                                    <!--<span>Assujétie à la TVA</span>-->
+                                <!--</t>-->
+                                <!--<t t-else="">-->
+                                    <!--<span t-esc="s['nom_taxes']" />-->
+                                <!--</t>-->
+                                <!--<t t-if="s['nom_taxes'] == 'Exonéré de TVA (vente)'">-->
+                                    <!--<span>Non assujétie à la TVA</span>-->
+                                <!--</t>-->
+                                <!--<t t-else="">-->
+                                    <!--<span t-esc="s['nom_taxes']" />-->
+                                <!--</t>-->
+                                <span t-if="s['nom_taxes'] == 'TVA 18% (vente)'">
+                                    ASSUJETTIE A LA TVA
+                                </span>
+                                <span t-elif="s['nom_taxes'] == 'Exonéré de TVA (vente)'">
+                                    NON ASSUJETTIE A LA TVA
+                                </span>
+                                <span t-else="">
+                                    <t t-esc="s['nom_taxes']"/>
+                                </span>
+
                             </td>
                             <td class="text-right" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
@@ -212,8 +267,8 @@
 
                     <tfoot>
                         <tr>
-                            <td align="left" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Total
+                            <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                                TOTAL
                             </td>
                             <!--<t t-set="taxes" t-value="0"/>-->
                             <!--<t t-foreach="re_test_data" t-as="s">-->
@@ -221,11 +276,11 @@
 
                             <!--</t>-->
 
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="total_montant_de_base" t-options='{"widget": "monetary", "display_currency": local_currency}' />
                             </td>
 
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="total_montant_de_taxe" t-options='{"widget": "monetary", "display_currency": local_currency}' />
                             </td>
 
@@ -256,18 +311,61 @@
                     <!--</tbody>-->
                 <!--</table>-->
 
-            </div>
 
-            <h4>PAIEMENT</h4>
+
+            <!--<h4>PAIEMENT</h4>-->
             <!--<div class="text-left">-->
+    <div>
 
-                <table style="border: 1px solid black;" class="table table-condensed" width="100%">
+                <!--<table class="mytable table-condensed" width="100%">-->
+                    <!--<thead class="thead-light">-->
+                        <!--<tr>-->
+                            <!--&lt;!&ndash;<th align="center" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">&ndash;&gt;-->
+                            <!--<th class="text-center ;">-->
+                                <!--PAIEMENTS-->
+                            <!--</th>-->
+                            <!--<th  class="text-center ; width:30% ">MONTANT</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+
+                    <!--<tbody>-->
+                        <!--<t t-set="total_paiement" t-value="0"/>-->
+                        <!--<tr t-foreach="journal_stat" t-as="s">-->
+                            <!--<t t-set="total_paiement" t-value="total_paiement + s['montant']"/>-->
+                            <!--&lt;!&ndash;<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">&ndash;&gt;-->
+                            <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <!--&lt;!&ndash;<td class="text-right">&ndash;&gt;-->
+                                <!--<span t-esc="s['nom']"/>-->
+
+
+                            <!--</td>-->
+                            <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+
+                                <!--<span t-esc="s['montant']" t-options='{"widget": "monetary", "display_currency": local_currency}' />-->
+
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                    <!--<tfoot>-->
+
+                        <!--<tr t-foreach="journal_stats" t-as="s">-->
+                            <!--<td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                                <!--TOTAL-->
+                            <!--</td>-->
+                             <!--<td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                                <!--<span t-esc="total_paiement" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</tfoot>-->
+                <!--</table>   -->
+        <table class="mytable table-condensed" width="100%">
                     <thead class="thead-light">
                         <tr>
-                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Moyens de Paiement
+                            <!--<th align="center" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <th class="text-center ;">
+                                PAIEMENTS
                             </th>
-                            <th class="text-right ; ">Montant</th>
+                            <th  class="text-center ; width:30% ">MONTANT</th>
                         </tr>
                     </thead>
 
@@ -275,13 +373,14 @@
                         <t t-set="total_paiement" t-value="0"/>
                         <tr t-foreach="journal_stat" t-as="s">
                             <t t-set="total_paiement" t-value="total_paiement + s['montant']"/>
-                            <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                             <!--<td class="text-right">-->
                                 <span t-esc="s['nom']"/>
 
 
                             </td>
-                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
 
                                 <span t-esc="s['montant']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
 
@@ -291,16 +390,18 @@
                     <tfoot>
 
                         <tr t-foreach="journal_stats" t-as="s">
-                            <td align="left" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                Total
+                            <!--<td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <td align="left">
+                                TOTAL
                             </td>
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                             <!--<td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                             <td class="text-right">
                                 <span t-esc="total_paiement" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />
                             </td>
                         </tr>
                     </tfoot>
                 </table>
-
+    </div>
             <!--</div>-->
 
 
@@ -310,7 +411,7 @@
                 <!--<table style="border-color: black;" class="table table-condensed">-->
                     <!--<tfoot>-->
                         <!--<tr t-foreach="journal_stats" t-as="s">-->
-                            <!--<td style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; vertical-align:middle; padding-right:5px">-->
+                            <!--<td style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; vertical-align:middle; padding-right:5px">-->
                                 <!--Total des Ventes-->
                             <!--</td>-->
                              <!--<td class="text-right" style="white-space: text-nowrap; float:right; font-size:25px; font-weight:bold; vertical-align:middle; padding-right:5px">-->
@@ -322,7 +423,7 @@
                     <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
                         <!--&lt;!&ndash;<tr t-foreach="journal_stats" t-as="s">&ndash;&gt;-->
 
-                            <!--&lt;!&ndash;<td class="text-right" style="white-space: text-nowrap; float:right; font-size:22px; font-weight:bold; vertical-align:middle; padding-right:5px">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; vertical-align:middle; padding-right:5px">&ndash;&gt;-->
                                 <!--&lt;!&ndash;<span t-esc="s['totals']" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />&ndash;&gt;-->
                             <!--&lt;!&ndash;</td>&ndash;&gt;-->
                         <!--&lt;!&ndash;</tr>&ndash;&gt;-->
