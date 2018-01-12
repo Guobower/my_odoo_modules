@@ -184,14 +184,75 @@ class ReportSaleDetails(models.AbstractModel):
 
         # TAXES UPDATES
         taxes_stat = []
+        re_taxes_stat = []
+        final_taxes_stat = []
         for line in order_line_dic:
             montant_taxe = line.price_subtotal_incl - line.price_subtotal
             montant_de_base = line.price_subtotal
             line_taxes_name = []
+            first_taxe_name = line.tax_ids[0].name
             # Un produit peut avoir plusieurs taxes donc la ligne de vente peut en avoir plusieurs aussi
             for taxe in line.tax_ids:
+                # line_taxes_name.append({"nom": taxe.name, "pourcentage": taxe.amount})
                 line_taxes_name.append(taxe.name)
-            taxes_stat.append({"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": line_taxes_name})
+            taxes_stat.append(
+                {"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": line_taxes_name})
+            re_taxes_stat.append(
+                {"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": first_taxe_name})
+
+        # TRAITEMENTS TAXES
+        t_values = set(map(lambda x: x['nom_taxes'], re_taxes_stat))
+        t_taxes = [[y for y in re_taxes_stat if y['nom_taxes'] == x] for x in t_values]
+
+        for t in t_taxes:
+            foo = {}
+            montant_de_base = 0
+            montant_taxe = 0
+            nom = ""
+            for r in t:
+                montant_de_base += r['montant_de_base']
+                montant_taxe += r['montant_taxe']
+                nom = r['nom_taxes']
+            foo['montant_taxe'] = montant_taxe
+            foo['montant_de_base'] = montant_de_base
+            foo['nom_taxes'] = nom
+
+            final_taxes_stat.append(foo)
+
+
+        # t_values = set(map(lambda x: map(lambda y: y, x['nom_taxes']), taxes_stat))
+        # test_tax = []
+        # for i in t_values:
+        #     for y in i:
+        #         test_tax.append(y)
+        #
+        # # t_taxes = [[z for y in taxes_stat for z in y['nom_taxes'] if z == x for x in test_tax]]
+        # # t_taxes = [[z, {"montant_taxe": y['montant_taxe'], "montant_de_base": y['montant_de_base']}] for y in taxes_stat for z in y['nom_taxes'] if z in test_tax]
+        # t_taxes = [[z, y] for y in taxes_stat for z in y['nom_taxes'] if z in test_tax]
+        # t_taxes_filtered = [[y for y in t_taxes if y[0] == x] for x in test_tax]
+        #
+        #
+        # for t in t_taxes:
+        #     stat = {}
+        #     taxe_name = t[0]
+        #     # somme_montant_base = t[2]
+        #     somme_montant_base = 0
+        #     # somme_montant_tax = t[1]
+        #     somme_montant_tax = 0
+        #     # foo = ""
+        #     # for l in t[1].items():
+        #     #     foo = l[0]
+        #     #     # somme_montant_base += l[0]
+        #     #     # somme_montant_base += l.get('montant_de_base')
+        #     #     # somme_montant_tax += l[1]
+        #     #     # somme_montant_tax += l.get('montant_taxe')
+        #     #     pass
+        #     stat['nom_taxe'] = taxe_name
+        #     # stat['montant_de_base'] = foo
+        #     stat['montant_de_base'] = somme_montant_base
+        #     stat['montant_tax'] = somme_montant_tax
+        #     # final_taxes_stat.append(stat)
+
 
 
 
@@ -248,7 +309,9 @@ class ReportSaleDetails(models.AbstractModel):
             'journal_stat': v_journals_stat,  # OK
             're_test_data': taxes_dic,
             'order_lines': order_line_dic,
-            # 'be_test_data': current_statements,
-            # 're_re_test_data': statement_ids_dic,
+            'be_test_data': t_taxes,
+            're_re_test_data': final_taxes_stat,
+            'taxes_stat': final_taxes_stat,
+            # 're_re_test_data': final_taxes_stat,
             # 'journal_data': journal_data,
         }
