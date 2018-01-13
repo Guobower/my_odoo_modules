@@ -6,28 +6,65 @@
         <div class="page">
 
             <style>
-                .mytable  {
-                    border-collapse: collapse;
-                    border: 1px solid #CCC;
-                    border-collapse: collapse
+            table.mytable {
+            border: 2px solid #FFFFFF;
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 2cm;
+            }
+            table.mytable td, table.mytable th {
+            border: 1px solid #FFFFFF;
+            padding: 3px 4px;
+            }
+            table.mytable tbody td {
+            font-size: 15px;
+            }
 
-                }
-                .mytable > tfoot {
-                    background-color: #e0e0e0;
-                    font-size:18px;
-                    font-weight:bold;
-                }
-                .mytable > thead > tr > th {
-                    border: 1px solid #CCC;
-                }
-                .mytable > td {
-                    border: none;
-                }
-                .mytable > tbody > tr > td {
-                    border: none;
+            table.mytable thead {
+            background: #FFFFFF;
+            border-bottom: 2px solid #333333;
+            }
 
-                }
+            table.mytable thead th[class="no_content"] {
+              border-top: none;
 
+            }
+
+            table.mytable tbody td:last-child {
+              border-left: 2px solid #333333
+            }
+
+            table.mytable tbody td[class="left_barre"] {
+              border-left: 2px solid #333333
+            }
+
+            table.mytable td:nth-child(2) {
+              border-left: 2px solid #333333;
+            }
+
+            table.mytable thead th {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            text-align: center;
+            border-left: 2px solid #333333;
+            border-top: 2px solid #333333;
+            }
+            table.mytable thead th:first-child {
+            border-left: none;
+            }
+
+            table.mytable tfoot {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            background: #EBEBEB;
+            border-top: 4px solid #333333;
+            }
+            table.mytable tfoot td {
+            font-size: 20px;
+            }
 
             </style>
 
@@ -168,14 +205,49 @@
     </t>
     <t t-else="">
 
-            <table style="border: 1px solid black;" class="mytable table table-condensed" width="100%">
+                            <!--<table class="mytable">-->
+                                <!--<thead>-->
+                                    <!--<tr>-->
+                                    <!--<th>CATEGORIE POS</th>-->
+                                    <!--<th>TOTAL</th>-->
+                                    <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tfoot>-->
+                                    <!--<tr>-->
+                                    <!--<td>TOTAL DES VENTES TTC</td>-->
+                                    <!--<td>foot2</td>-->
+                                    <!--</tr>-->
+                                <!--</tfoot>-->
+                                <!--<tbody>-->
+                                    <!--<tr>-->
+                                    <!--<td>cell1_1</td>-->
+                                    <!--<td>cell2_1</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                    <!--<td>cell1_2</td>-->
+                                    <!--<td>cell2_2</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                    <!--<td>cell1_3</td>-->
+                                    <!--<td>cell2_3</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                    <!--<td>cell1_4</td>-->
+                                    <!--<td>cell2_4</td>-->
+                                    <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+
+            <table class="mytable  table-condensed" width="100%">
 
                     <thead>
                         <tr>
-                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <!--<th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <th class="text-center ;">
                                 CATEGORIE POS
                             </th>
-                            <th class="text-right ; width:30% ">TOTAL</th>
+                            <!--<th class="text-center ; width:30% ">TOTAL</th>-->
+                            <th style="width:30%;" class="text-center">TOTAL</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -191,10 +263,10 @@
                     </tfoot>
                     <tbody>
                         <tr t-foreach="stats" t-as="a">
-                            <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span class="text-lowercase" t-esc="a['famille']" />
+                            <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
+                                <span  t-esc="a['famille']" />
                             </td>
-                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="a['total']" t-options='{"widget": "monetary", "display_currency": a["currency"]}' />
                             </td>
                         </tr>
@@ -205,16 +277,16 @@
 
 
 
-                <table style="border: 1px solid black;" class="mytable table table-condensed" width="100%">
+                <table class="mytable table-condensed" width="100%">
                     <thead>
                         <tr>
-                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-bottom:1px solid black; vertical-align:middle; padding-right:5px">
+                            <th class="no_content">
 
                             </th>
-                            <th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <th class="text-center ;">
                                 MONTANT TAXABLE
                             </th>
-                            <th>TVA</th>
+                            <th style="width:30%;" class="text-center">TVA</th>
 
 
                         </tr>
@@ -255,10 +327,11 @@
                                 </span>
 
                             </td>
-                            <td class="text-right" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <!--<td class="text-right left_barre" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <td class="text-right left_barre">
                                 <span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
                             </td>
-                             <td class="text-right" style="white-space: text-nowrap;border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                             <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span t-esc="s['montant_taxe']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
                             </td>
 
@@ -365,7 +438,8 @@
                             <th class="text-center ;">
                                 PAIEMENTS
                             </th>
-                            <th  class="text-center ; width:30% ">MONTANT</th>
+                            <th style="width:30%;" class="text-center">MONTANT</th>
+                            <!--<th  class="text-center ; width:30% ">MONTANT</th>-->
                         </tr>
                     </thead>
 
@@ -376,7 +450,7 @@
                             <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
                             <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                             <!--<td class="text-right">-->
-                                <span t-esc="s['nom']"/>
+                                <span class="text-uppercase" t-esc="s['nom']"/>
 
 
                             </td>
