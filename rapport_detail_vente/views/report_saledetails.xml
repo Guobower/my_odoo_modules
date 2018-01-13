@@ -31,12 +31,17 @@
 
             }
 
-            table.mytable tbody td:last-child {
-              border-left: 2px solid #333333
+            table.mytable td:last-child {
+              border-left: 2px solid #333333;
+              border-right: 2px solid #333333;
+            }
+
+             table.mytable td:first-child {
+              border-left: 2px solid #333333;
             }
 
             table.mytable tbody td[class="left_barre"] {
-              border-left: 2px solid #333333
+              border-left: 2px solid #333333;
             }
 
             table.mytable td:nth-child(2) {
@@ -60,7 +65,7 @@
             font-weight: bold;
             color: #333333;
             background: #EBEBEB;
-            border-top: 4px solid #333333;
+            border-top: 3px solid #333333;
             }
             table.mytable tfoot td {
             font-size: 20px;
@@ -266,7 +271,8 @@
                             <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span  t-esc="a['famille']" />
                             </td>
-                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <td class="text-right">
                                 <span t-esc="a['total']" t-options='{"widget": "monetary", "display_currency": a["currency"]}' />
                             </td>
                         </tr>
@@ -277,90 +283,92 @@
 
 
 
-                <table class="mytable table-condensed" width="100%">
-                    <thead>
-                        <tr>
-                            <th class="no_content">
+            <table class="mytable table-condensed" width="100%">
+                <thead>
+                    <tr>
+                        <th class="no_content">
 
-                            </th>
-                            <th class="text-center ;">
-                                MONTANT TAXABLE
-                            </th>
-                            <th style="width:30%;" class="text-center">TVA</th>
+                        </th>
+                        <th class="text-center ;">
+                            MONTANT TAXABLE
+                        </th>
+                        <th style="width:30%;" class="text-center">TVA</th>
 
 
-                        </tr>
+                    </tr>
 
-                    </thead>
+                </thead>
 
-                    <tbody>
-                        <t t-set="total_montant_de_base" t-value="0"/>
-                        <t t-set="total_montant_de_taxe" t-value="0"/>
+                <tbody>
+                    <t t-set="total_montant_de_base" t-value="0"/>
+                    <t t-set="total_montant_de_taxe" t-value="0"/>
 
-                        <tr t-foreach="taxes_stat" t-as="s">
-                            <t t-set="total_montant_de_base" t-value="total_montant_de_base + s['montant_de_base'] "/>
-                            <t t-set="total_montant_de_taxe" t-value="total_montant_de_taxe + s['montant_taxe'] "/>
-                            <td class="text-left">
-                            <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black;  border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                    <tr t-foreach="taxes_stat" t-as="s">
+                        <t t-set="total_montant_de_base" t-value="total_montant_de_base + s['montant_de_base'] "/>
+                        <t t-set="total_montant_de_taxe" t-value="total_montant_de_taxe + s['montant_taxe'] "/>
+                        <td class="text-left">
+                        <!--<td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black;  border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
 
-                                <!-- Ce que je vais faire n'est pas jolie : BAD HACK -->
-                                <!--<t t-if="s['nom_taxes'] == 'TVA 18% (vente)'">-->
-                                    <!--<span>Assujétie à la TVA</span>-->
-                                <!--</t>-->
-                                <!--<t t-else="">-->
-                                    <!--<span t-esc="s['nom_taxes']" />-->
-                                <!--</t>-->
-                                <!--<t t-if="s['nom_taxes'] == 'Exonéré de TVA (vente)'">-->
-                                    <!--<span>Non assujétie à la TVA</span>-->
-                                <!--</t>-->
-                                <!--<t t-else="">-->
-                                    <!--<span t-esc="s['nom_taxes']" />-->
-                                <!--</t>-->
-                                <span t-if="s['nom_taxes'] == 'TVA 18% (vente)'">
-                                    ASSUJETTIE A LA TVA
-                                </span>
-                                <span t-elif="s['nom_taxes'] == 'Exonéré de TVA (vente)'">
-                                    NON ASSUJETTIE A LA TVA
-                                </span>
-                                <span t-else="">
-                                    <t t-esc="s['nom_taxes']"/>
-                                </span>
-
-                            </td>
-                            <!--<td class="text-right left_barre" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
-                            <td class="text-right left_barre">
-                                <span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
-                            </td>
-                             <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span t-esc="s['montant_taxe']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
-                            </td>
-
-                        </tr>
-                    </tbody>
-
-                    <tfoot>
-                        <tr>
-                            <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                TOTAL
-                            </td>
-                            <!--<t t-set="taxes" t-value="0"/>-->
-                            <!--<t t-foreach="re_test_data" t-as="s">-->
-                                <!--<t t-set="taxes" t-value="taxes + s"/>-->
-
+                            <!-- Ce que je vais faire n'est pas jolie : BAD HACK -->
+                            <!--<t t-if="s['nom_taxes'] == 'TVA 18% (vente)'">-->
+                                <!--<span>Assujétie à la TVA</span>-->
                             <!--</t>-->
+                            <!--<t t-else="">-->
+                                <!--<span t-esc="s['nom_taxes']" />-->
+                            <!--</t>-->
+                            <!--<t t-if="s['nom_taxes'] == 'Exonéré de TVA (vente)'">-->
+                                <!--<span>Non assujétie à la TVA</span>-->
+                            <!--</t>-->
+                            <!--<t t-else="">-->
+                                <!--<span t-esc="s['nom_taxes']" />-->
+                            <!--</t>-->
+                            <span t-if="s['nom_taxes'] == 'TVA 18% (vente)'">
+                                ASSUJETTIE A LA TVA
+                            </span>
+                            <span t-elif="s['nom_taxes'] == 'Exonéré de TVA (vente)'">
+                                NON ASSUJETTIE A LA TVA
+                            </span>
+                            <span t-else="">
+                                <t t-esc="s['nom_taxes']"/>
+                            </span>
 
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span t-esc="total_montant_de_base" t-options='{"widget": "monetary", "display_currency": local_currency}' />
-                            </td>
+                        </td>
+                        <!--<td class="text-right left_barre" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                        <td class="text-right left_barre">
+                            <span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                        </td>
+                         <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                         <td class="text-right">
+                            <span t-esc="s['montant_taxe']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                        </td>
 
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
-                                <span t-esc="total_montant_de_taxe" t-options='{"widget": "monetary", "display_currency": local_currency}' />
-                            </td>
+                    </tr>
+                </tbody>
 
-                        </tr>
-                    </tfoot>
+                <tfoot>
+                    <tr>
+                        <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            TOTAL
+                        </td>
+                        <!--<t t-set="taxes" t-value="0"/>-->
+                        <!--<t t-foreach="re_test_data" t-as="s">-->
+                            <!--<t t-set="taxes" t-value="taxes + s"/>-->
 
-                </table>
+                        <!--</t>-->
+
+                         <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <span t-esc="total_montant_de_base" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                        </td>
+
+                         <!--<td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                         <td class="text-right">
+                            <span t-esc="total_montant_de_taxe" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                        </td>
+
+                    </tr>
+                </tfoot>
+
+            </table>
                 <!--<h4 class="text-right">TOTAL TAXES</h4>-->
                 <!--<table class="table table-condensed">-->
                     <!--<thead>-->
@@ -454,7 +462,8 @@
 
 
                             </td>
-                            <td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
+                            <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
+                            <td class="text-right">
 
                                 <span t-esc="s['montant']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
 
