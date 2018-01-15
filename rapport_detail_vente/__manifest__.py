@@ -3,14 +3,14 @@
     'name': "rapport detail vente",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Génération améliorée de détails des ventes """,
 
     'description': """
-        Long description of module's purpose
+        Module de Génération de Rapport des ventes
+        détaillées par Catégorie POS
     """,
 
-    'author': "My Company",
+    'author': "SODIAL SA",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -30,6 +30,7 @@
         'views/report_saledetails.xml',
         'views/rapport_detail_vente.xml',
         'views/point_of_sale_report.xml',
+        'views/paper_format.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -103,7 +103,7 @@ class ReportSaleDetails(models.AbstractModel):
 
         return self.env.cr.dictfetchall()
 
-    @api.model
+    @api.multi
     def get_report_values(self, docids, data=None):
         self.model = self.env.context.get('active_model')
         docs = self.env[self.model].browse(self.env.context.get('active_id'))
@@ -123,6 +123,9 @@ class ReportSaleDetails(models.AbstractModel):
         reorders = self.env['report.pos.order'].search(
             [('location_id', '=', docs.location.id), ('date', '>=', date_requested), ('date', '<=', end_date)])
 
+        new_reorders = self.env['report.pos.order'].search(
+            [('location_id', '=', docs.location.id), ('date', '>=', date_requested), ('date', '<=', end_date)])
+
         # GROUPED BY POS CATEGORY
         values = set(map(lambda x: x.pos_categ_id.name, reorders))
         new_reorders = [[y for y in reorders if y.pos_categ_id.name == x] for x in values]
@@ -138,6 +141,8 @@ class ReportSaleDetails(models.AbstractModel):
         orders_dic = []
         taxes_dic = []
         order_line_dic = []
+        new_order_lines_dic = []
+        orders_id_dic = []
 
         local_currency = None
         for order in reorders:
@@ -145,6 +150,8 @@ class ReportSaleDetails(models.AbstractModel):
             sessions = order.session_id
             journals = order.journal_id
             orders = order.order_id
+            orders_id_dic.append(orders)
+            new_order_lines_dic.append(orders.id)
 
             total = 0
             statement_ids_dic.append(statement_ids)
@@ -153,7 +160,9 @@ class ReportSaleDetails(models.AbstractModel):
             for o in orders:
                 orders_dic.append(o)
                 taxes_dic.append(o.amount_tax)
-                order_line_dic.append(o.lines)
+                lines = o.lines
+
+                # order_line_dic.append(lines)
 
             for journal in journals:
                 journal_ids.append({journal, journal.name})
@@ -162,8 +171,23 @@ class ReportSaleDetails(models.AbstractModel):
                 session_ids.append(session)
                 second_session_ids.append(session.id)
 
+        # for order in orders_id_dic:
+        #     new_order_lines_dic.append(order.lines)
+        #
+        # orders_id_dic = reorders.order_id
+        # orders_id_dic = new_reorders.order_id
+
+        unique_order_dic = set(map(lambda x: x.id, orders_id_dic))
+        real_orders_no_duplication = self.env['pos.order'].browse(unique_order_dic)
+        for o in real_orders_no_duplication:
+            for l in o.lines:
+                order_line_dic.append(l)
+        unique_line_order_dic = set(map(lambda x: x.id, order_line_dic))
+        real_order_lines_no_duplication = self.env['pos.order.line'].browse(unique_line_order_dic)
+        # real_order_lines_no_duplication = [[y for y in order_line_dic if y.id == x] for x in unique_line_order_dic]
+
         journal_id_name = []
-        for ord in orders_dic:
+        for ord in real_orders_no_duplication:
             for statement in ord.statement_ids:
                 journal_id_name.append({'journal_name': statement.journal_id.name, 'montant': statement.amount})
 
@@ -186,7 +210,8 @@ class ReportSaleDetails(models.AbstractModel):
         taxes_stat = []
         re_taxes_stat = []
         final_taxes_stat = []
-        for line in order_line_dic:
+        for line in real_order_lines_no_duplication:
+            line.ensure_one()
             montant_taxe = line.price_subtotal_incl - line.price_subtotal
             montant_de_base = line.price_subtotal
             line_taxes_name = []
@@ -200,10 +225,27 @@ class ReportSaleDetails(models.AbstractModel):
             re_taxes_stat.append(
                 {"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": first_taxe_name})
 
-        # TRAITEMENTS TAXES
+        #NO DUPLICATION
+
+        #  for line in order_line_dic:
+        #     line.ensure_one()
+        #     montant_taxe = line.price_subtotal_incl - line.price_subtotal
+        #     montant_de_base = line.price_subtotal
+        #     line_taxes_name = []
+        #     first_taxe_name = line.tax_ids[0].name
+        #     # Un produit peut avoir plusieurs taxes donc la ligne de vente peut en avoir plusieurs aussi
+        #     for taxe in line.tax_ids:
+        #         # line_taxes_name.append({"nom": taxe.name, "pourcentage": taxe.amount})
+        #         line_taxes_name.append(taxe.name)
+        #     taxes_stat.append(
+        #         {"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": line_taxes_name})
+        #     re_taxes_stat.append(
+        #         {"montant_taxe": montant_taxe, "montant_de_base": montant_de_base, "nom_taxes": first_taxe_name})
+        #
+        # # TRAITEMENTS TAXES
         t_values = set(map(lambda x: x['nom_taxes'], re_taxes_stat))
         t_taxes = [[y for y in re_taxes_stat if y['nom_taxes'] == x] for x in t_values]
-
+        #
         for t in t_taxes:
             foo = {}
             montant_de_base = 0
@@ -252,9 +294,6 @@ class ReportSaleDetails(models.AbstractModel):
         #     stat['montant_de_base'] = somme_montant_base
         #     stat['montant_tax'] = somme_montant_tax
         #     # final_taxes_stat.append(stat)
-
-
-
 
         order_stats = []
         order_journal_stats = []
@@ -308,7 +347,12 @@ class ReportSaleDetails(models.AbstractModel):
             'retest_data': v_journals_stat,
             'journal_stat': v_journals_stat,  # OK
             're_test_data': taxes_dic,
-            'order_lines': order_line_dic,
+            # 'order_lines': order_line_dic,
+            # 'order_lines': orders_id_dic,
+            # 'order_lines': unique_order_dic,
+            # 'order_lines': real_orders_no_duplication,
+            # 'order_lines': unique_line_order_dic,
+            'order_lines': real_order_lines_no_duplication,
             'be_test_data': t_taxes,
             're_re_test_data': final_taxes_stat,
             'taxes_stat': final_taxes_stat,

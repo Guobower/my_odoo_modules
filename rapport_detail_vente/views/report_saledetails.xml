@@ -11,7 +11,7 @@
             width: 100%;
             text-align: center;
             border-collapse: collapse;
-            margin-bottom: 2cm;
+            margin-bottom: 1cm;
             }
             table.mytable td, table.mytable th {
             border: 1px solid #FFFFFF;
@@ -61,14 +61,14 @@
             }
 
             table.mytable tfoot {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: bold;
             color: #333333;
             background: #EBEBEB;
             border-top: 3px solid #333333;
             }
             table.mytable tfoot td {
-            font-size: 20px;
+            font-size: 19px;
             }
 
             </style>
@@ -255,19 +255,11 @@
                             <th style="width:30%;" class="text-center">TOTAL</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr t-foreach="journal_stats" t-as="s">
-                            <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
 
-                                TOTAL DES VENTES TTC
-                            </td>
-                             <td class="text-right" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; vertical-align:middle; padding-right:5px">
-                                <span t-esc="s['totals']" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />
-                            </td>
-                        </tr>
-                    </tfoot>
                     <tbody>
+                        <t t-set="total_montant" t-value="0"/>
                         <tr t-foreach="stats" t-as="a">
+                            <t t-set="total_montant" t-value="total_montant + a['total'] "/>
                             <td class="text-left" style="white-space: text-nowrap; border-right:solid 1px black; vertical-align:middle; padding-right:5px">
                                 <span  t-esc="a['famille']" />
                             </td>
@@ -277,6 +269,18 @@
                             </td>
                         </tr>
                     </tbody>
+
+                    <tfoot>
+                            <tr t-foreach="journal_stats" t-as="s">
+                                <td align="left" style="white-space: text-nowrap; float:right; font-size:18px; font-weight:bold; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">
+
+                                    TOTAL DES VENTES TTC
+                                </td>
+                                 <td class="text-right">
+                                    <span t-esc="total_montant" t-options='{"widget": "monetary", "display_currency": s["currency"]}' />
+                                </td>
+                            </tr>
+                    </tfoot>
 
             </table>
 
