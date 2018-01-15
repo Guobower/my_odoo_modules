@@ -36,6 +36,17 @@ class ReportSaleDetails(models.TransientModel):
     # pos_config_ids = fields.Many2many('pos.config', 'pos_detail_configs',
     #                                   default=lambda s: s.env['pos.config'].search([]))
 
+    @api.onchange('date')
+    def _onchange_start_date(self):
+        if self.date and self.date_fin and self.date_fin < self.date:
+            self.date_fin = self.date
+
+    @api.onchange('date_fin')
+    def _onchange_end_date(self):
+        if self.date_fin and self.date_fin < self.date:
+            self.date = self.date_fin
+
+
     @api.multi
     def generate_report(self):
         if not self.env.user.company_id.logo:
