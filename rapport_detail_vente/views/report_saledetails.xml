@@ -67,7 +67,7 @@
             font-weight: bold;
             color: #333333;
             background: #EBEBEB;
-            border-top: 3px solid #333333;
+            border-top: 2px solid #333333;
             border-bottom: 2px solid #333333;
             }
             table.mytable tfoot td {
@@ -257,7 +257,7 @@
                         <tr>
                             <!--<th style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
                             <th class="text-center ;">
-                                CATEGORIE POS
+                                VENTES / CATEGORIE POS
                             </th>
                             <!--<th class="text-center ; width:30% ">TOTAL</th>-->
                             <th style="width:30%;" class="text-center">TOTAL</th>
@@ -273,7 +273,10 @@
                             </td>
                             <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
                             <td class="text-right">
-                                <span t-esc="a['total']" t-options='{"widget": "monetary", "display_currency": a["currency"]}' />
+                                <!--<span t-esc="a['total']" t-options='{"widget": "monetary", "display_currency": a["currency"]}' />-->
+                                <!--<span t-esc="a['total']" t-options='{"widget": "monetary"}' />-->
+                                
+                                <span t-esc="'{0:,.1f}'.format(float(a['total'])).replace(',', ' ')" />
                             </td>
                         </tr>
                     </tbody>
@@ -298,11 +301,11 @@
             <table class="mytable table-condensed" width="100%">
                 <thead>
                     <tr>
-                        <th class="no_content">
-
+                        <th class="text-center no_content">
+                            CALCUL TVA
                         </th>
                         <th class="text-center ;">
-                            MONTANT TAXABLE
+                            MONTANT
                         </th>
                         <th style="width:30%;" class="text-center">TVA</th>
 
@@ -347,11 +350,17 @@
                         </td>
                         <!--<td class="text-right left_barre" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
                         <td class="text-right left_barre">
-                            <span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                            <!--<span t-esc="s['montant_de_base']" t-options='{"widget": "monetary", "display_currency": local_currency}' />-->
+                            <!--<span t-esc="s['montant_de_base']" t-options='{"widget": "monetary"}' />-->
+                            <!--<span t-esc="s['montant_de_base']" />-->
+                            <span t-esc="'{0:,.1f}'.format(float(s['montant_de_base'])).replace(',', ' ')" />
                         </td>
                          <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
                          <td class="text-right">
-                            <span t-esc="s['montant_taxe']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                            <!--<span t-esc="s['montant_taxe']" t-options='{"widget": "monetary", "display_currency": local_currency}' />-->
+                            <!--<span t-esc="s['montant_taxe']" t-options='{"widget": "monetary"}' />-->
+
+                             <span t-esc="'{0:,.1f}'.format(float(s['montant_taxe'])).replace(',', ' ')" />
                         </td>
 
                     </tr>
@@ -456,7 +465,7 @@
                         <tr>
                             <!--<th align="center" style="white-space: text-nowrap; border-right:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black; vertical-align:middle; padding-right:5px">-->
                             <th class="text-center ;">
-                                PAIEMENTS
+                                MOYENS DE PAIEMENTS
                             </th>
                             <th style="width:30%;" class="text-center">MONTANT</th>
                             <!--<th  class="text-center ; width:30% ">MONTANT</th>-->
@@ -477,7 +486,10 @@
                             <!--<td class="text-right" style="white-space: text-nowrap; float:right; border-right:solid 1px black; vertical-align:middle; padding-right:5px">-->
                             <td class="text-right">
 
-                                <span t-esc="s['montant']" t-options='{"widget": "monetary", "display_currency": local_currency}' />
+                                <!--<span t-esc="s['montant']" t-options='{"widget": "monetary", "display_currency": local_currency}' />-->
+                                <!--<span t-esc="s['montant']" t-options='{"widget": "monetary"}' />-->
+
+                                <span t-esc="'{0:,.1f}'.format(float(s['montant'])).replace(',', ' ')" />
 
                             </td>
                         </tr>
