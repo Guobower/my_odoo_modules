@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!-- pickid from stock_barcode\views\inherited_stock_picking_views.xml -->
+        <record id="stock_picking_view_form_inherit_stock_barcode" model="ir.ui.view">
+            <field name="name">bon.reception.stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock_barcode.stock_picking_view_form_inherit_stock_barcode"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='do_print_picking']" position="attributes">
+                    <attribute name="barcode_trigger">re-imprimer</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
