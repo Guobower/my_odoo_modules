@@ -37,8 +37,7 @@
                         <field name="barcode"/>
                         <field name="pattern" invisible="1"/>
                         <field name="locked" invisible="1"/>
-
-                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer Code Barre" class="oe_highlight" type="object" name="re_generate_record_barcode" />
+                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer Code Barre" class="oe_highlight" type="object" name="generate_record_barcode" />
 
                     </group>
                 </sheet>
@@ -60,8 +59,7 @@
                         <field name="locked" invisible="1"/>
                         <!--<field name="barcode_ids" invisible="[('barcode_ids', '=', [])]"/>-->
                         <field name="barcode_ids" />
-
-                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer des Codes Barre" class="oe_highlight" type="object" name="re_generate_record_barcode" />
+                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer des Codes Barre" class="oe_highlight" type="object" name="generate_record_barcode" />
                     </group>
                 </sheet>
             </form>
