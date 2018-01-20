@@ -93,6 +93,15 @@ class LotBarcodeRegister(models.Model):
     _name = 'barcode_generator.lot_barecode_register'
     _inherit = 'barcode.rule'
 
+    models_with_barrecode = {
+        'weight': 'product.product',
+        'price': 'product.product',
+        'discount': 'product.product',
+        'client': 'res.partner',
+        'cashier': 'res.partner',
+        'product': 'product.product',
+    }
+
     def generate_name(self):
         name = "lot-%s-%s" % (self.type, int(round(time.time() * 1000)))
         return name
@@ -102,11 +111,11 @@ class LotBarcodeRegister(models.Model):
 
     locked = fields.Boolean(string="Locked", help="Security for barcode register", default=False)
 
-    nombre = fields.Integer(string="Nombre", default=1)
+    nombre = fields.Integer(string="Nombre ", default=1)
 
     barcode_ids = fields.One2many('barcode_generator.barecode_register', 'lot_barcode_register_id',
                                   string="Code Barres",
-                                  help="Liste des code barre du lot",)
+                                  help="Liste des code barre du lot", )
 
     @api.onchange('type')
     def _onchange_type(self):
@@ -142,20 +151,22 @@ class LotBarcodeRegister(models.Model):
         if not self.locked:
             r = []
             barcode_register = self.env['barcode_generator.barecode_register']
+            current_type_model = self.models_with_barrecode[self.type]
             for i in range(self.nombre):
                 name = "%s-%s" % (self.type, int(round(time.time() * 1000)))
                 o = barcode_register.create({'type': self.type,
-                                         'barcode': self.generate_barcode(),
-                                         'pattern': self.pattern,
+                                             'barcode': self.generate_barcode(current_type_model),
+                                             'pattern': self.pattern,
                                              'name': name,
                                              'locked': True})
                 r.append(o.id)
             self.barcode_ids = r
             self.locked = True
 
-    def generate_barcode(self):
+    def generate_barcode(self, model):
         barcode = None
-        while not barcode or self.env['barcode_generator.barecode_register'].search([('barcode', '=', barcode)]):
+        while not barcode or (self.env['barcode_generator.barecode_register'].search([('barcode', '=', barcode)])
+                              and self.env[model].search([('barcode', '=', barcode)])):
             # barcode = self.barcode + "".join(choice(digits) for i in range(8))
             if self.pattern:
                 barcode = self.pattern + "".join(choice(digits) for i in range(8))
