@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="bon_commande.apres_entete_bon">
+
+        <style type='text/css'>
+
+
+
+        </style>
+
+    <br/>
+        <table style="width:100%;">
+                <tr style="font-weight:bold;">
+                    <td  style="width:50%; float:left">
+
+                           <table id="tab_ref" style="width:98%; float:left">
+                                  <tr style="font-weight:bold; height:41px !important;">
+                                    <td style="vertical-align:middle;width:50%">REFERENCE</td>
+                                    <td style="vertical-align:middle;width:50%">N° FOURNISSEUR</td>
+                                  </tr>
+                                  <tr style="height:33px;">
+                                    <td style="vertical-align:middle"><span t-field="o.name"/></td>
+                                    <td style="vertical-align:middle"><span t-field="o.partner_id.ref"/></td>
+                                  </tr>
+                               <tr style="height:34px">
+                                    <td style="vertical-align:middle">LIVRAISON LE: <span t-field="o.date_planned" t-options ='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="vertical-align:middle"><span/></td>
+                                  </tr>
+
+
+                            </table>
+                    </td>
+
+
+                    <td style="width:50%; float:right">
+                            <table id="tab_doit" style="width:98%; float: right; height:110px !important">
+                                  <tr style="height:50px important;">
+                                    <td style="text-align:left; vertical-align:middle; font-weight:bold;"><span t-field="o.partner_id"></span></td>
+                                  </tr>
+                                <tr style="height:7px;">
+                                    <td style="border-right:0px;border-top:0px;border-left:0px;border-bottom:0px"></td>
+
+                                  </tr>
+                                  <tr>
+                                    <td style="border-bottom:0px; height:20px">TEL: <span t-field="o.partner_id.phone"/> </td>
+
+                                  </tr>
+                                <tr>
+                                    <td style="border-top:0px;height:20px;border-bottom:0px;" >FAX: <span/></td>
+
+                                  </tr>
+
+                                <tr>
+
+                                    <td style="height:20px;border-top:0px;"><span t-field="o.partner_id.street"/></td>
+                                  </tr>
+
+                            </table>
+
+                    </td>
+                </tr>
+
+        </table>
+    </template>
+
+</odoo>
