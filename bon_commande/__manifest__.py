@@ -3,13 +3,13 @@
     'name': "bon_commande",
 
     'summary': """
-        Bon de commande SODEA""",
+        Bon de commande MARYMARKET""",
 
     'description': """
-        Bon de commande SODEA
+        Bon de commande MARYMARKET
     """,
 
-    'author': "SODEA",
+    'author': "MARYMARKET",
     'website': "http://www.labelbleu.sn",
     'application':True,
 

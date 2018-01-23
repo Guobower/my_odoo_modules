@@ -94,7 +94,7 @@ def format_to_int(amount):
 
 
 class purchase_order(models.Model):
-    _name="purchase.order"
+    _name = "purchase.order"
     _inherit = "purchase.order"
 
     @api.model

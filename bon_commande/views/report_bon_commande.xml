@@ -4,7 +4,7 @@
 <report
             id="report_bon_commande_sodea"
             model="purchase.order"
-            string="Bon de commande SODEA"
+            string="Bon de commande MM"
             name="bon_commande.bcommande_sodea"
             file="report_bon_commande_sodea"
             report_type="qweb-pdf"

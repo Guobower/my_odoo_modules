@@ -17,11 +17,12 @@
 
                     #tab_produits tr td {border:1px solid black;text-align:center}
                                   #tab_produits tr:last-child td{
-                                        background: #EBEBEB;
+
                                         margin-top: 200%;
                                         height: 200%;
 
                                     }
+
                                  #tab_produits tr:first-child td{vertical-align:middle}
                                   #tab_produits {height:140mm;margin-top:10px; margin-bottom:10px;width:100%;}
 
@@ -30,17 +31,26 @@
                             #tab_totaux tr td {border:1px solid black;text-align:center; margin-top:10px !important}
                             #tab_visas tr td {border:1px solid black;text-align:center}
                     #tab_ml {margin-top:20px;}
+
+                            @page:last {
+                                @bottom-center {
+                                content: "HELLO WORLD !!";
+                                }
+                            }
+
                     </style>
 
-                    <div>
+
 
 
                         <!-- Appeler le template apres entete-->
                         <t t-call="bon_commande.apres_entete_bon"/>
-
+                     <div id="main_container">
                         <!-- Appeler le template detail-->
 
+
                          <t t-call="bon_commande.detail_bon"/>
+
 
 
                     </div>
@@ -49,8 +59,8 @@
 
                          <!--<t  t-call="bon_commande.pied_bon"/>-->
                      <!--</div>-->
-
-                    <table class="footer" width="100%">
+                <div class="footer">
+                    <table  width="100%">
                         <tr style="height:5px !important"/>
                         <tr>
                         <td></td>
@@ -58,6 +68,9 @@
                         <td style="text-align:right;">RC : SNDKR 2011 B 1150 - NINEA : 432 9894 2D2</td>
                       </tr>
                     </table>
+
+
+                </div>
 
 
             </div>
@@ -72,13 +85,35 @@
 
         <style>
         table, tr, td, th, tbody, thead, tfoot, .keeptogether {
-        page-break-inside: avoid !important;
+            page-break-inside: avoid !important;
+        }
+
+         thead{
+            display: table-header-group;
+         }
+
+        <!--.keeptogether{-->
+            <!--page-break-inside: avoid !important;-->
+
+        <!--}-->
+
+        #bottom_last_page{
+            position: fixed;
+            bottom : 0 !important;
+         }
+
+        #main_container{
+            position : relative;
         }
 
         table.last_row_table_margin > tr:last-child{
 
             margin-top: 200%;
         }
+
+
+
+
 
         </style>
 

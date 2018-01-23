@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="account_invoices_mm"
+            model="account.invoice"
+            string="Facture Fournisseur MM"
+            report_type="qweb-pdf"
+            name="factures_mm.report_invoice_mm"
+            file="account.report_invoice"
+        />
+    </data>
+</odoo>

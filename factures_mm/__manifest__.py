@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "rapport detail vente",
+    'name': "Factures MM",
 
     'summary': """
-        Génération améliorée de détails des ventes """,
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Module de Génération de Rapport des ventes
-        détaillées par Catégorie POS
+        Long description of module's purpose
     """,
 
     'author': "SODIAL SA",
@@ -20,17 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'point_of_sale', 'entete_pied_page_marymarket'],
+    'depends': ['base', 'account'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/report_saledetails.xml',
-        'views/rapport_detail_vente.xml',
-        'views/point_of_sale_report.xml',
-        'views/paper_format.xml',
+        'views/factures_mm_report.xml',
+        'views/factures_mm_report_view.xml',
+        'views/entete_factures_mm.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

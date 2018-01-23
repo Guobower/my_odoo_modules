@@ -4,7 +4,7 @@
 <div>
 
     <table class="last_row_table_margin" id="tab_produits">
-        <tbody>
+        <thead>
           <tr style="height:30px !important; font-weight:bold">
             <td>CODE</td>
             <td>DESIGNATION</td>
@@ -15,6 +15,18 @@
             <td>TVA</td>
             <td>MONTANT HT</td>
           </tr>
+        </thead>
+        <tbody>
+          <!--<tr style="height:30px !important; font-weight:bold">-->
+            <!--<td>CODE</td>-->
+            <!--<td>DESIGNATION</td>-->
+            <!--<td>QTE</td>-->
+
+              <!--<td>P.U.</td>-->
+            <!--<td>REMISE</td>-->
+            <!--<td>TVA</td>-->
+            <!--<td>MONTANT HT</td>-->
+          <!--</tr>-->
 
 
           <tr t-foreach="o.order_line" t-as="l" style="font-size:13px !important; height:30px !important">
@@ -36,11 +48,22 @@
             <td style="border-top:0px"></td>
         </tr>
         </tbody>
+        <tfoot>
+            <tr style="border-bottom: 1px solid #333333;">
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+            </tr>
+        </tfoot>
 </table>
         <!--Fin Table Designations-->
  </div>
 
-   <div class="mycontainer"></div>
+   <div id="bottom_last_page">
 
    <div class="keeptogether">
     <!--Debut Totaux-->
@@ -68,7 +91,7 @@
                           <td style="text-align:center;border-width: 1px solid black;border-color:black;"><span t-esc="o.separateur_millier(o.amount_tax)"/> FCFA</td>
                           <td style="text-align:center;border-width: 1px solid black;border-color:black;font-weight:bold; vertical-align:middle" t-att-rowspan="o.nombre_ligne_tva()"><span t-esc="o.separateur_millier(o.amount_untaxed)"/> FCFA</td>
                           <td style="text-align:center;border-width: 1px solid black;border-color:black; font-weight:bold; vertical-align:middle" t-att-rowspan="o.nombre_ligne_tva()"><span t-esc="o.separateur_millier(o.arrondir(o.amount_total))"/> FCFA</td>
-                          <td style="text-align:center;border-width: 1px solid black;border-color:black; font-weight:bold; vertical-align:middle" t-att-rowspan="o.nombre_ligne_tva()"><span t-esc="o.separateur_millier(o.amount_total)"/> FCFA</td>
+                          <td style="text-align:center;border-width: 1px solid black;border-color:black; font-weight:bold; vertical-align:middle" t-att-rowspan="o.nombre_ligne_tva()"><span t-esc="o.separateur_millier(o.arrondir(o.amount_total))"/> FCFA</td>
 
                       </tr>
 
@@ -130,6 +153,7 @@
 
 
      </div>
+ </div>
 
     </template>
 </odoo>
