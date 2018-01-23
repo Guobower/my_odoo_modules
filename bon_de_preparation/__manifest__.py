@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "barcode generator",
+    'name': "bon de preparation",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
         subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Génération de Code Barre Suivant Le Type des Règles de Nomenclature
+        Long description of module's purpose
     """,
 
     'author': "SODIAL SA",
@@ -20,19 +20,18 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'barcodes', 'sale', 'stock'],
+    'depends': ['base'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/barcode_generator_view.xml',
         'views/report.xml',
+        'views/new_stock_picking_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
-    'application': True,
 }

@@ -53,9 +53,9 @@ class BarecodeRegister(models.Model):
         while not barcode or self.search([('barcode', '=', barcode)]):
             # barcode = self.barcode + "".join(choice(digits) for i in range(8))
             if self.pattern:
-                barcode = self.pattern + "".join(choice(digits) for i in range(8))
+                barcode = self.pattern + "".join(choice(digits) for i in range(11))
             else:
-                barcode = "".join(choice(digits) for i in range(8))
+                barcode = "".join(choice(digits) for i in range(11))
         return barcode
 
     @api.onchange('type')
@@ -169,7 +169,7 @@ class LotBarcodeRegister(models.Model):
                               and self.env[model].search([('barcode', '=', barcode)])):
             # barcode = self.barcode + "".join(choice(digits) for i in range(8))
             if self.pattern:
-                barcode = self.pattern + "".join(choice(digits) for i in range(8))
+                barcode = self.pattern + "".join(choice(digits) for i in range(11))
             else:
-                barcode = "".join(choice(digits) for i in range(8))
+                barcode = "".join(choice(digits) for i in range(11))
         return barcode

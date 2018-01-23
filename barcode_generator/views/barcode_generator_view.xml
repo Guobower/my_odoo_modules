@@ -53,7 +53,7 @@
                 <sheet>
                     <group>
                         <field name="name" invisible="1"/>
-                        <field name="nombre"/>
+                        <field string="Nombre de Code-barres" name="nombre"/>
                         <field name="type"/>
                         <field name="pattern" invisible="1"/>
                         <field name="locked" invisible="1"/>
