@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="factures_mm.apres_entete_client">
+
+          <style type='text/css'>
+
+
+
+</style>
+
+    <br/>
+        <table style="width:100%;">
+                <tr style="font-weight:bold;">
+                    <td  style="width:60%; float:left">
+
+                           <table id="tab_ref" style="width:98%; float:left">
+                                  <tr style="font-weight:bold; height:41px !important;">
+                                    <td style="vertical-align:middle">REFERENCE</td>
+                                    <td style="vertical-align:middle">N° COMPTE CLIENT</td>
+                                  </tr>
+                                  <tr style="height:67px">
+                                    <td style="vertical-align:middle"><span t-field="o.name"/></td>
+                                    <td style="vertical-align:middle"><span t-field="o.account_id"/></td>
+                                  </tr>
+
+
+                            </table>
+                    </td>
+
+
+                    <td style="width:40%; float:right">
+                            <table id="tab_doit" style="width:98%; float: right; height:110px !important">
+                                  <tr style="height:50px important;">
+                                    <td style="text-align:left; vertical-align:middle; font-weight:bold;">DOIT: <span t-field="o.partner_id"></span></td>
+                                  </tr>
+                                <tr style="height:7px;">
+                                    <td style="border-right:0px;border-top:0px;border-left:0px;border-bottom:0px"></td>
+
+                                  </tr>
+                                  <tr>
+                                    <td style="border-bottom:0px; height:20px">TEL: <span t-field="o.partner_id.phone"/> </td>
+
+                                  </tr>
+
+
+                                <tr>
+
+                                    <td style="height:20px;border-top:0px;"><span t-field="o.partner_id.street"/></td>
+                                  </tr>
+
+                            </table>
+
+                    </td>
+                </tr>
+
+
+
+    </table>
+    </template>
+
+</odoo>

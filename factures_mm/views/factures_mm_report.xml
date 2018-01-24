@@ -8,6 +8,8 @@
             report_type="qweb-pdf"
             name="factures_mm.report_invoice_mm"
             file="account.report_invoice"
+            paperformat="entete_pied_page_marymarket.paperformat_marymarket"
+
         />
     </data>
 </odoo>

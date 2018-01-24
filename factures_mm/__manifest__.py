@@ -20,16 +20,25 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account'],
+    'depends': ['base', 'account', 'entete_pied_page_marymarket'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/factures_mm_report.xml',
+        'views/paper_format.xml',
         'views/factures_mm_report_view.xml',
+        'views/factures_mm_report.xml',
         'views/entete_factures_mm.xml',
+        'views/apres_entete_factures_fournisseur.xml',
+        'views/detail_factures_fournisseur_mm.xml',
+        'views/detail_factures_client_mm.xml',
+        'views/apres_entete_factures_fournisseur.xml',
+        'views/apres_entete_factures_client.xml',
+        'views/pied_factures_client.xml',
+        'views/pied_factures_fournisseur.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [
