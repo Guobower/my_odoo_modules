@@ -1,9 +1,9 @@
-from odoo import api,models
+from odoo import api, models, fields
 
 from datetime import datetime
 import locale
 
-to_19_fr = ('zero','un', 'deux', 'trois', 'quatre', 'cinq', 'six',
+to_19_fr = ('zero', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six',
             'sept', 'huit', 'neuf', 'dix', 'onze', 'douze', 'treize',
             'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf')
 tens_fr = ('vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante-dix', 'quatre-vingts', 'quatre-vingt Dix')
@@ -80,20 +80,44 @@ def amount_to_text_fr(numbers, currency):
 
     if start_word.lower().startswith(("millions")):
         final_result = 'un ' + start_word + ' ' + units_name
-        final_result=final_result.replace("millions", "million")
+        final_result = final_result.replace("millions", "million")
     else:
         final_result = start_word + ' ' + units_name
     return final_result
 
 
 def format_to_int(amount):
-
     return ('%.2f' % amount).rstrip('0').rstrip('.')
 
 
 class account_invoice(models.Model):
     _name = "account.invoice"
     _inherit = "account.invoice"
+
+    @api.multi
+    def _get_emplacement(self):
+        emplacement = None
+        telephone_emplacement = None
+        for record in self:
+            origin = record.origin
+            if self.type == 'out_invoice':
+                order = self.env['pos.order'].search([('name', '=', origin)], limit=1)
+                emplacement = order.location_id.name
+                if order.location_id.x_studio_field_63rEV:
+                    telephone_emplacement = order.location_id.x_studio_field_63rEV
+                # location = self.env['stock.location'].search([('id', '=', order.location_id.id)])
+            else:
+                order = self.env['purchase.order'].search([('name', '=', origin)], limit=1)
+
+                if order.dest_address_id:
+                    emplacement = order.dest_address_id.name
+                    telephone_emplacement = order.dest_address_id.x_studio_field_63rEV
+
+                if order.picking_type_id.default_location_dest_id:
+                    emplacement = order.picking_type_id.default_location_dest_id.name
+                    telephone_emplacement = order.picking_type_id.default_location_dest_id.x_studio_field_63rEV
+
+        return {'lieu': emplacement, 'telephone': telephone_emplacement}
 
     @api.multi
     def montant_en_lettre(self, amount, currency='FCFA'):
@@ -165,9 +189,9 @@ class account_invoice(models.Model):
     def nombre_ligne_tva(self):
         nombre = 0
         if self.existe_taux_18():
-            nombre = nombre+1
+            nombre = nombre + 1
         if self.existe_taux_0():
-            nombre = nombre+1
+            nombre = nombre + 1
         return nombre
 
     @api.multi
@@ -197,7 +221,7 @@ class account_invoice(models.Model):
     def separateur_millier(self, amount):
 
         valeur_entiere = ('%.2f' % amount).rstrip('0').rstrip('.')
-        valeur=locale.format("%d", int(valeur_entiere), grouping=True)
+        valeur = locale.format("%d", int(valeur_entiere), grouping=True)
         return valeur.replace(",", " ")
 
     @api.multi
@@ -209,7 +233,7 @@ class account_invoice(models.Model):
         dernier_caractere = montant_string.strip()[-1]
 
         if int(dernier_caractere) < 5 and int(dernier_caractere) != 0:
-                amount = int(amount) - int(dernier_caractere)
+            amount = int(amount) - int(dernier_caractere)
         elif int(dernier_caractere) > 5:
             amount = int(amount) - int(dernier_caractere) + 10
 

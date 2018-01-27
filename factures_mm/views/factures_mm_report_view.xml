@@ -118,8 +118,8 @@
                             <tr style="height:5px !important"/>
                             <tr>
                             <td></td>
-                            <td>Imprimé le, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></td>
-                            <td style="text-align:right;">RC : SNDKR 2011 B 1150 - NINEA : 432 9894 2D2</td>
+                            <td>Imprimé le, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/></td>
+                            <td style="text-align:right;"><span>Page </span><span class="page" /> / <span class="topage" /></td>
                           </tr>
                         </table>
 
@@ -260,32 +260,20 @@
 
 
                 <style>
-                    table, tr, td, th, tbody, thead, tfoot, .keeptogether {
-                        page-break-inside: avoid !important;
-                    }
+                    <!--table, tr, td, th, tbody, thead, tfoot, .keeptogether {-->
+                        <!--page-break-inside: avoid !important;-->
+                    <!--}-->
 
                      thead{
                         display: table-header-group;
                      }
 
-                    <!--.keeptogether{-->
-                        <!--page-break-inside: avoid !important;-->
+                    .keeptogether{
+                        page-break-inside: avoid !important;
 
-                    <!--}-->
-
-                    #bottom_last_page{
-                        position: fixed;
-                        bottom : 0 !important;
-                     }
-
-                    #main_container{
-                        position : relative;
                     }
 
-                    table.last_row_table_margin > tr:last-child{
-
-                        margin-top: 200%;
-                    }
+                    
 
                 </style>
 

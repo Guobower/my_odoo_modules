@@ -3,7 +3,7 @@
 
     <template id="bon_commande.pied_bon">
          <div class="last-page">
-            <table  style="border:1px solid #000; height:142px" width="100%">
+            <table  style="border:1px solid #000; height:142px; page-break-inside: avoid !important;" width="100%">
               <tbody>
                 <tr style="height:20px !important">
                     <td class="col-xs-3" style="text-align:center;border: 1px solid black;border-color:black;font-weight:bold">VISA ACHAT</td>

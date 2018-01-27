@@ -66,56 +66,131 @@
 
               <!-- entete-->
       <table style="width:100%; margin-top:15px">
-       <tr>
-                  <td align="left">
-                      <br/>
-                      <p style="text-align:left">
-                        <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:50%;max-height:50%'"/>
+           <thead>
+              <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+           <tr>
+                      <td align="left">
+                          <br/>
+                          <p style="text-align:left">
+                            <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:50%;max-height:50%'"/>
 
-                      </p>
+                          </p>
 
-                    <p style="font-size: 12px"><span t-field="o.company_id.street"/></p>
-                    <p style="font-size: 12px;"><span t-field="o.company_id.website"/></p>
-                    <p style="font-size: 12px;">Tél: <span t-field="o.company_id.phone"/> </p>
-
-                  </td>
-                  <td><strong></strong>
+                        <t t-set="emplacement_data" t-value="o._get_emplacement()" />
+                        <p style="font-size: 12px;"><span t-esc="emplacement_data['lieu']"/> </p>
+                        <p style="font-size: 12px;">Tél: <span t-esc="emplacement_data['telephone']"/> </p>
 
 
-                  </td>
-                  <td style="width:5%;"> </td>
+                      </td>
+                      <td><strong></strong>
 
-                   <tr>
-                    <h2>
-                         <td align="right">
-                              <strong style="font-size: 36px">
-                                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
-                                  FACTURE CLIENT
-                                </span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">
-                                  PRO-FORMA
-                                </span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">FACTURE
-                                  BROUILLON
-                                </span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">FACTURE
-                                  ANNULEE
-                                </span>
-                                <span t-if="o.type == 'out_refund'">AVOIR</span>
-                                <span t-if="o.type == 'in_refund'">AVOIR FOURNISSEUR</span>
-                                <span t-if="o.type == 'in_invoice'" style="font-size:30 !important">FACTURE FOURNISSEUR</span>
-                                 <p> </p>
-                                  <p> </p>
-                                  <p style="font-size: 18px">N° :&#160;<span t-field="o.number"/>
-                                     &#160;&#160;&#160; DU &#160;&#160;
-                                    <span t-field="o.date_invoice"/>
-                                 </p>
-                              </strong>
-                         </td>
-                    </h2>
-                </tr>
 
-       </tr></table>
+                      </td>
+                      <td style="width:55% !important;"> </td>
+
+                      <td style="text-align: left;" align="right">
+                            <!--<h2>-->
+                                 <!--<td align="right">-->
+                                      <!--<strong style="font-size: 36px">-->
+
+                                        <!--<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">-->
+                                          <!--FACTURE CLIENT-->
+                                        <!--</span>-->
+                                        <!--<span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">-->
+                                          <!--PRO-FORMA-->
+                                        <!--</span>-->
+                                        <!--<span t-if="o.type == 'out_invoice' and o.state == 'draft'">FACTURE-->
+                                          <!--BROUILLON-->
+                                        <!--</span>-->
+                                        <!--<span t-if="o.type == 'out_invoice' and o.state == 'cancel'">FACTURE-->
+                                          <!--ANNULEE-->
+                                        <!--</span>-->
+                                        <!--<span t-if="o.type == 'out_refund'">AVOIR</span>-->
+                                        <!--<span t-if="o.type == 'in_refund'">AVOIR FOURNISSEUR</span>-->
+                                        <!--<span t-if="o.type == 'in_invoice'" style="font-size:30 !important">FACTURE FOURNISSEUR</span>-->
+
+                                        <!--<p> </p>-->
+                                        <!--<p> </p>-->
+                                        <!--<p style="font-size: 18px">N° :&#160;<span t-field="o.number"/>-->
+                                             <!--&#160;&#160;&#160; DU &#160;&#160;-->
+                                            <!--<span t-field="o.date_invoice"/>-->
+                                        <!--</p>-->
+                                      <!--</strong>-->
+                                 <!--</td>-->
+                            <!--</h2>-->
+                        </td>
+
+           </tr>
+      </table>
+      <table style="width:100%; margin-top:15px">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+           <tr>
+                      <td align="left">
+                          <!--<br/>-->
+                          <!--<p style="text-align:left">-->
+                            <!--<img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:50%;max-height:50%'"/>-->
+
+                          <!--</p>-->
+
+                        <!--<t t-set="emplacement_data" t-value="o._get_emplacement()" />-->
+                        <!--<p style="font-size: 12px;"><span t-esc="emplacement_data['lieu']"/> </p>-->
+                        <!--<p style="font-size: 12px;">Tél: <span t-esc="emplacement_data['telephone']"/> </p>-->
+
+
+                      </td>
+                      <td><strong></strong>
+
+
+                      </td>
+                      <td style="width:55% !important;"> </td>
+
+                       <td style="text-align: left;" align="right">
+                            <h2>
+                                 <td style="text-align: left;" align="right">
+                                      <strong style="font-size: 36px">
+
+                                        <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
+                                          FACTURE CLIENT
+                                        </span>
+                                        <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">
+                                          PRO-FORMA
+                                        </span>
+                                        <span t-if="o.type == 'out_invoice' and o.state == 'draft'">FACTURE
+                                          BROUILLON
+                                        </span>
+                                        <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">FACTURE
+                                          ANNULEE
+                                        </span>
+                                        <span t-if="o.type == 'out_refund'">AVOIR</span>
+                                        <span t-if="o.type == 'in_refund'">AVOIR FOURNISSEUR</span>
+                                        <span t-if="o.type == 'in_invoice'" style="font-size:30 !important">FACTURE FOURNISSEUR</span>
+
+                                        <p> </p>
+                                        <p> </p>
+                                        <p style="font-size: 18px">N° :&#160;<span t-field="o.number"/>
+                                             &#160;&#160;&#160; DU &#160;&#160;
+                                            <span t-field="o.date_invoice"/>
+                                        </p>
+                                      </strong>
+                                 </td>
+                            </h2>
+                        </td>
+
+           </tr>
+      </table>
     <!-- Fin entete-->
     </template>
     <!--Fin entete-->

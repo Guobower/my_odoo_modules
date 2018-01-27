@@ -4,7 +4,7 @@
         <report
             id="account_invoices_mm"
             model="account.invoice"
-            string="Facture Fournisseur MM"
+            string="Facture  MM"
             report_type="qweb-pdf"
             name="factures_mm.report_invoice_mm"
             file="account.report_invoice"

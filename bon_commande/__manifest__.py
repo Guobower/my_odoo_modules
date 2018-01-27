@@ -26,7 +26,9 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/paper_format.xml',
-        'views/apres_entete.xml','views/detail.xml',
+        'views/re_apres_entete.xml',
+        'views/apres_entete.xml',
+        'views/detail.xml',
         'views/pied.xml','views/bon_de_commande.xml',
         'views/report_bon_commande.xml',
         'views/purchase_discount_view.xml',

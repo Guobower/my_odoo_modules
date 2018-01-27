@@ -118,7 +118,7 @@
            <div class="page_footer" style="margin-bottom:0px; margin-top:0px;">
                  <!-- Appeler le template pied-->
 
-             <t  t-call="factures_mm.pied_client"/>
+             <t  t-call="factures_mm.pied_fournisseur"/>
           </div>
 
     </div>
