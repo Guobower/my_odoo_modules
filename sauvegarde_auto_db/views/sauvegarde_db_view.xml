@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_sauvegarde_config_form" model="ir.ui.view">
+            <field name="name">sauvegarde.db.form</field>
+            <field name="model">sauvegarde.db</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="sauvegarde view">
+                    <group col="4" colspan="4">
+                        <separator col="2" string="Configuration des Sauvegardes Automatiques"/>
+                    </group>
+                    <group>
+                        <field name="host" colspan="2"/>
+                        <field name="name"/>
+                        <field name="port"/>
+                        <field name="backup_type"/>
+                        <field name="folder"/>
+                        <field name="autoremove"/>
+                        <field name="days_to_keep" attrs="{'invisible': [('autoremove','=',False)]}"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sauvegarde_config_tree" model="ir.ui.view">
+            <field name="name">sauvegarde.db.tree</field>
+            <field name="model">sauvegarde.db</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Backups">
+                    <field string="serveur" name='host'/>
+                    <field string="port" name='port'/>
+                    <field name='name'/>
+                    <field name='folder'/>
+                    <field name="autoremove"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_sauvegarde" model="ir.actions.act_window">
+            <field name="name">Configurer Sauvegarde</field>
+            <field name="res_model">sauvegarde.db</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sauvegarde_config_tree"/>
+        </record>
+
+        <menuitem id="sauvegarde_config_main_menu" name="Configuration de Sauvegarde"/>
+        <menuitem id="auto_sauvegarde_menu" name="Sauvegardes" parent="sauvegarde_config_main_menu"/>
+        <!--<menuitem id="auto_sauvegarde_menu" name="Sauvegardes" parent="base.menu_custom"/>-->
+        <menuitem parent="auto_sauvegarde_menu" action="action_sauvegarde" id="backup_conf_menu"/>
+    </data>
+</odoo>
