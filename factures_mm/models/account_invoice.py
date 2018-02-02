@@ -1,6 +1,7 @@
 from odoo import api, models, fields
 
 from datetime import datetime
+import time
 import locale
 
 to_19_fr = ('zero', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six',
@@ -93,6 +94,24 @@ def format_to_int(amount):
 class account_invoice(models.Model):
     _name = "account.invoice"
     _inherit = "account.invoice"
+
+    @api.model
+    def get_report_values(self, docids, data=None):
+        self.model = self.env.context.get('active_model')
+        docs = self.env[self.model].browse(self.env.context.get('active_id'))
+        parametres = []
+        emplacement_data = self._get_emplacement()
+
+        parametres[0]['emplacement'] = emplacement_data['lieu']
+        parametres[0]['telephone'] = emplacement_data['telephone']
+
+        return {
+            'doc_ids': self.ids,
+            'doc_model': self.model,
+            'docs': docs,
+            'time': time,
+            'parametres': parametres,
+        }
 
     @api.multi
     def _get_emplacement(self):

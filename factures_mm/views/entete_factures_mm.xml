@@ -61,8 +61,12 @@
     <!--</template>-->
     <!--Fin entete-->
 
-    <!-- Debut entete-->
+    <!-- Debut entete Facture MM-->
      <template id="entete">
+
+
+        <!--Appel de l'entete du module entete_pied_de_page_marymarket-->
+        <!--<t t-call="entete_pied_page_marymarket.entete"/>-->
 
               <!-- entete-->
       <table style="width:100%; margin-top:15px">
@@ -78,13 +82,31 @@
                       <td align="left">
                           <br/>
                           <p style="text-align:left">
-                            <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:50%;max-height:50%'"/>
+                            <!--<img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:50%;max-height:50%'"/>-->
+                            <!--<img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-width:200%;max-height:50%'"/>-->
+                            <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo.decode('ascii')" t-att-style="'max-height:80%'"/>
 
                           </p>
 
                         <t t-set="emplacement_data" t-value="o._get_emplacement()" />
-                        <p style="font-size: 12px;"><span t-esc="emplacement_data['lieu']"/> </p>
-                        <p style="font-size: 12px;">Tél: <span t-esc="emplacement_data['telephone']"/> </p>
+                        <t t-if="emplacement_data['lieu'] and emplacement_data['telephone']">
+
+                            <p style="font-size: 12px;"><span t-esc="emplacement_data['lieu']"/> </p>
+                            <p style="font-size: 12px;"><span t-esc="res_company.company_registry"/> - <span t-esc="res_company.partner_id.vat"/></p>
+                            <p style="font-size: 12px;">Tél: <span t-esc="emplacement_data['telephone']"/> </p>
+                            <p style="font-size: 12px;"><span t-esc="res_company.partner_id.city"/> BP <span t-esc="res_company.partner_id.zip"/></p>
+                        </t>
+                        <t t-else="">
+                            <p style="font-size: 12px;"><span t-esc="res_company.partner_id.street"/></p>
+                            <p style="font-size: 12px;"><span t-esc="res_company.company_registry"/> - <span t-esc="res_company.partner_id.vat"/></p>
+                            <p style="font-size: 12px;">Tél: <span t-esc="res_company.partner_id.phone"/></p>
+                            <p style="font-size: 12px;"><span t-esc="res_company.partner_id.city"/> BP <span t-esc="res_company.partner_id.zip"/></p>
+
+                            <!--<div t-esc="res_company.partner_id"-->
+                                 <!--t-options='{"widget": "contact", "fields": ["phone", "address", "name"], "no_marker": True}'/>-->
+                            <!--<div t-esc="res_company.partner_id"-->
+                                 <!--t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>-->
+                        </t>
 
 
                       </td>
@@ -157,7 +179,7 @@
                       </td>
                       <td style="width:55% !important;"> </td>
 
-                       <td style="text-align: left;" align="right">
+                      <td style="text-align: left;" align="right">
                             <h2>
                                  <td style="text-align: left;" align="right">
                                       <strong style="font-size: 36px">
@@ -193,7 +215,8 @@
       </table>
     <!-- Fin entete-->
     </template>
-    <!--Fin entete-->
+    <!--Fin entete Facture MM-->
+
 
 
 </odoo>
