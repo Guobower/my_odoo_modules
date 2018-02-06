@@ -3,20 +3,28 @@
      <template id="factures_mm.detail_client">
 <div>
 
-    <table id="tab_produits">
+    <!--<table id="tab_produits">-->
+
+
+ <table id="tab_produits">
+
+     <thead>
           <tr style="height:30px !important; font-weight:bold">
-            <!--<td>CODE</td>-->
-            <td>DESIGNATION</td>
-            <td>QTE</td>
-            <td>UNITE</td>
 
-            <td>P.U. HTVA</td>
-            <td>REMISE</td>
-            <td>TVA</td>
-            <td>MONTANT HT</td>
+                <!--<td>CODE</td>-->
+                <td>DESIGNATION</td>
+                <td>QTE</td>
+                <td>UNITE</td>
+
+                <td>P.U. HTVA</td>
+                <td>REMISE</td>
+                <td>TVA</td>
+                <td>MONTANT HT</td>
+
           </tr>
+     </thead>
 
-
+     <tbody>
           <tr t-foreach="o.invoice_line_ids" t-as="l" style="font-size:13px !important; height:30px !important">
             <!--<td style="border-bottom:0px; border-top:0px; width:50px"><span t-field="l.product_id.default_code"/></td>-->
               <t t-set="designation_name" t-value="l.name"/>
@@ -42,7 +50,67 @@
                 <td style="border-top:0px"></td>
                 <td style="border-top:0px"></td>
             </tr>
+     </tbody>
+     <tfoot>
+            <tr>
+                <!--<td style="border-top:0px"></td>-->
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+                <td style="border-top:0px"></td>
+            </tr>
+     </tfoot>
+
     </table>
+
+
+
+    <!--<table id="tab_produits">-->
+
+          <!--<tr style="height:30px !important; font-weight:bold">-->
+
+                <!--&lt;!&ndash;<td>CODE</td>&ndash;&gt;-->
+                <!--<td>DESIGNATION</td>-->
+                <!--<td>QTE</td>-->
+                <!--<td>UNITE</td>-->
+
+                <!--<td>P.U. HTVA</td>-->
+                <!--<td>REMISE</td>-->
+                <!--<td>TVA</td>-->
+                <!--<td>MONTANT HT</td>-->
+
+          <!--</tr>-->
+
+
+          <!--<tr t-foreach="o.invoice_line_ids" t-as="l" style="font-size:13px !important; height:30px !important">-->
+            <!--&lt;!&ndash;<td style="border-bottom:0px; border-top:0px; width:50px"><span t-field="l.product_id.default_code"/></td>&ndash;&gt;-->
+              <!--<t t-set="designation_name" t-value="l.name"/>-->
+            <!--<td style="border-bottom:0px; border-top:0px; text-align:left; padding-left:5px"><span t-esc="designation_name.split(']')[1]"/></td>-->
+            <!--&lt;!&ndash;<td style="border-bottom:0px; border-top:0px; width:300px; text-align:left; padding-left:5px"><span t-esc="designation_name.split(']')[1]"/></td>&ndash;&gt;-->
+            <!--<td style="border-bottom:0px; border-top:0px;width:80px; text-align:right; padding-left:5px; padding-right:5px"><span t-esc="'{0:,.2f}'.format(l.quantity).replace('.', ',')"/> </td>-->
+            <!--<td style="border-bottom:0px; border-top:0px;width:80px; text-align:right; padding-left:5px; padding-right:5px"> <span t-field="l.uom_id"/></td>-->
+            <!--<td style="border-bottom:0px; border-top:0px; width:90px; text-align:right; padding-right:5px; width:100px">-->
+                 <!--<span t-esc="'{0:,.0f}'.format(l.price_unit).replace(',', ' ')"/> </td>-->
+             <!--&lt;!&ndash;<td style="border-bottom:0px; border-top:0px; width:90px; text-align:right; padding-right:5px;"><span t-esc="o.separateur_millier(int(l.price_unit))"/></td>&ndash;&gt;-->
+            <!--<td style="border-bottom:0px; border-top:0px;  width:70px; text-align:right; padding-right:5px;"><span t-field="l.discount"/>%</td>-->
+            <!--<td style="border-bottom:0px; border-top:0px; width:60px; text-align:right; padding-right:5px;"><span t-esc="'{0:,.0f}'.format(int(l.invoice_line_tax_ids.amount))"/>%</td>-->
+            <!--<td style="border-bottom:0px; border-top:0px; width:100px; text-align:right; padding-right:5px;"><span t-esc="o.separateur_millier(int(l.price_subtotal))"-->
+                                        <!--/></td>-->
+          <!--</tr>-->
+            <!--<tr>-->
+                <!--&lt;!&ndash;<td style="border-top:0px"></td>&ndash;&gt;-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+                <!--<td style="border-top:0px"></td>-->
+            <!--</tr>-->
+    <!--</table>-->
         <!--Fin Table Designations-->
  </div>
 

@@ -10,9 +10,10 @@
                     <style type='text/css'>
 
                     #tab_produits tr td {border:1px solid black;text-align:center}
-                      #tab_produits tr:last-child td{}
-                     #tab_produits tr:first-child td{vertical-align:middle}
-                      #tab_produits {height:140mm;margin-top:10px; margin-bottom:10px;width:100%;}
+                    #tab_produits tr:last-child td{}
+                    #tab_produits tr:first-child td{vertical-align:middle}
+
+                    #tab_produits {height:100mm;margin-top:10px; margin-bottom:10px;width:100%;}
 
                     #tab_ref tr td {border:1px solid black;text-align:center}
                     #tab_doit tr td {border:1px solid black;  padding-left:5px;text-align:left}
@@ -21,11 +22,11 @@
                     #tab_ml {margin-top:20px;}
 
 
-                    table, tr, td, th, tbody, thead, tfoot, .keeptogether {
+                    tfoot, .keeptogether {
                         page-break-inside: avoid !important;
                     }
 
-                     thead{
+                     tr.myheader{
                         display: table-header-group;
                      }
 
