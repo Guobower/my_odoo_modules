@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="product_barcode_creation_action" model="ir.actions.act_window">
+        <field name="name">product_barcode_creation.action</field>
+        <field name="res_model">model_barcode_generator.product.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="product_barcode_wizard_view"/>
+    </record>
+
+    <menuitem name="model barcode generator" id="model_barcode_generator.menu_root"/>
+    <menuitem name="Generation" id="model_barcode_generator.menu_1" parent="model_barcode_generator.menu_root"/>
+    <menuitem name="Product" id="model_barcode_generator.menu_2" parent="model_barcode_generator.menu_root" action="product_barcode_creation_action"/>
+
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <record id="product_barcode_wizard_view" model="ir.ui.view">
+        <field name="name">model_barcode_generator.product_barcode_view_wizard</field>
+        <field name="model">model_barcode_generator.product.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="product_ids"/>
+                </group>
+
+                <footer>
+                        <button string="Annuler" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
