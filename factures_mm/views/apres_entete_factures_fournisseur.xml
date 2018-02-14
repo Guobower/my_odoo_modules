@@ -11,16 +11,32 @@
     <br/>
         <table style="width:100%;">
                 <tr style="font-weight:bold;">
-                    <td  style="width:60%; float:left">
+                    <!--<td  style="width:60%; float:left">-->
+                    <!--<td  style="width:50%; float:left">-->
+                    <!--<td  style="width:45%; float:left">-->
+                    <td  style="width:46%; float:left">
+                    <!--<td  style="width:40%; float:left">-->
 
-                           <table id="tab_ref" style="width:98%; float:left">
+                           <!--<table id="tab_ref" style="width:98%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.8%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.7%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.6%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.5%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.4%; float:left">-->
+                           <!--<table id="tab_ref" style="width:97.3%; float:left">-->
+                           <table id="tab_ref" style="width:97.2%; float:left">
                                   <tr style="font-weight:bold; height:41px !important;">
-                                    <td style="vertical-align:middle">REFERENCE</td>
-                                    <td style="vertical-align:middle">N° COMPTE FOURNISSEUR</td>
+                                    <!--<td style="vertical-align:middle">REFERENCE</td>-->
+                                    <!--<td style="vertical-align:middle ; width:80px">REFERENCE</td>-->
+                                    <!--<td style="vertical-align:middle ; width:85px">REFERENCE</td>-->
+                                    <td style="vertical-align:middle ; width:85px">REF</td>
+                                    <!--<td style="vertical-align:middle">N° COMPTE FOURNISSEUR</td>-->
+                                    <td style="vertical-align:middle">N° BON DE COMMANDE</td>
                                   </tr>
                                   <tr style="height:67px">
                                     <td style="vertical-align:middle"><span t-field="o.reference"/></td>
-                                    <td style="vertical-align:middle"><span t-field="o.account_id"/></td>
+                                    <!--<td style="vertical-align:middle"><span t-field="o.account_id"/></td>-->
+                                    <td style="vertical-align:middle"><span t-field="o.origin"/></td>
                                   </tr>
 
 
@@ -29,7 +45,10 @@
 
 
                     <td style="width:40%; float:right">
-                            <table id="tab_doit" style="width:98%; float: right; height:110px !important">
+                            <!--<table id="tab_doit" style="width:98%; float: right; height:110px !important">-->
+                            <!--<table id="tab_doit" style="width:102%; float: right; height:109px !important">-->
+                            <!--<table id="tab_doit" style="width:102.3%; float: right; height:109px !important">-->
+                            <table id="tab_doit" style="width:102.4%; float: right; height:109px !important">
                                   <tr style="height:50px important;">
                                     <td style="text-align:left; vertical-align:middle; font-weight:bold;"><span t-field="o.partner_id"></span></td>
                                   </tr>

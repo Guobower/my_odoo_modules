@@ -99,6 +99,11 @@
                             </t>
                             <p style="font-size: 12px;">Tél: <span t-esc="emplacement_data['telephone']"/> </p>
                             <p style="font-size: 12px;"><span t-esc="res_company.partner_id.city"/> BP <span t-esc="res_company.partner_id.zip"/></p>
+
+                            <!--<t t-if="emplacement_data['logo']">-->
+                                <!--<span t-esc="emplacement_data['logo']" t-options='{"widget": "image"}'/>-->
+                            <!--</t>-->
+
                         </t>
                         <t t-else="">
                             <p style="font-size: 12px;"><span t-esc="res_company.partner_id.street"/></p>
@@ -182,12 +187,31 @@
 
 
                       </td>
-                      <td style="width:55% !important;"> </td>
+                      <!--<td style="width:55% !important;"> </td>-->
+               <!--Facture client -->
+                      <!--<td t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"-->
+                          <!--style="width:56.5% !important;"> </td>-->
+                      <!--<td t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"-->
+                          <!--style="width:55% !important;"> </td>-->
+                      <td t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"
+                          style="width:54.2% !important;"> </td>
+                      <td t-elif="o.type == 'in_invoice'"
+                          style="width:52.2% !important;"> </td>
+                       <td t-else="" style="width:55% !important;"> </td>
+
+                      <!--<td style="width:60% !important;"> </td>-->
+                      <!--<td style="width:65% !important;"> </td>-->
+                      <!--<td style="width:64% !important;"> </td>-->
+                      <!--<td style="width:63% !important;"> </td>-->
+                      <!--<td style="width:62% !important;"> </td>-->
+                      <!--<td style="width:61% !important;"> </td>-->
 
                       <td style="text-align: left;" align="right">
-                            <h2>
+                            <!--<h2>-->
+                            <h3>
                                  <td style="text-align: left;" align="right">
-                                      <strong style="font-size: 36px">
+                                      <strong style="font-size: 30px">
+                                      <!--<strong style="font-size: 20px">-->
 
                                         <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
                                           FACTURE CLIENT
@@ -203,7 +227,9 @@
                                         </span>
                                         <span t-if="o.type == 'out_refund'">AVOIR</span>
                                         <span t-if="o.type == 'in_refund'">AVOIR FOURNISSEUR</span>
-                                        <span t-if="o.type == 'in_invoice'" style="font-size:30 !important">FACTURE FOURNISSEUR</span>
+                                        <!--<span t-if="o.type == 'in_invoice'" style="font-size:30px !important;">FACTURE FOURNISSEUR</span>-->
+                                        <!--<span t-if="o.type == 'in_invoice'" style="font-size:20px !important;">FACTURE FOURNISSEUR</span>-->
+                                        <span t-if="o.type == 'in_invoice'" style="font-size:25px !important;">FACTURE FOURNISSEUR</span>
 
                                         <p> </p>
                                         <p> </p>
@@ -213,7 +239,7 @@
                                         </p>
                                       </strong>
                                  </td>
-                            </h2>
+                            </h3>
                         </td>
 
            </tr>

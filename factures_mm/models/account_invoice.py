@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import api, models, fields
 
 from datetime import datetime
@@ -24,7 +26,7 @@ def _convert_nn_fr(val):
         if dval + 10 > val:
             if val % 10:
                 if dval == 70 or dval == 90:
-                    return tens_fr[dval / 10 - 3] + '-' + to_19_fr[val % 10 + 10]
+                    return tens_fr[int(dval / 10) - 3] + '-' + to_19_fr[val % 10 + 10]
                 else:
                     return dcap + '-' + to_19_fr[val % 10]
             return dcap
@@ -117,6 +119,7 @@ class account_invoice(models.Model):
     def _get_emplacement(self):
         emplacement = None
         telephone_emplacement = None
+        logo_emplacement = None
         for record in self:
             origin = record.origin
             if self.type == 'out_invoice':
@@ -124,18 +127,34 @@ class account_invoice(models.Model):
                 emplacement = order.location_id.name
                 if order.location_id.x_studio_field_63rEV:
                     telephone_emplacement = order.location_id.x_studio_field_63rEV
+
+                if order.location_id.telephone:
+                    telephone_emplacement = order.location_id.telephone
+
+                # if order.location_id.logo:
+                #     logo_emplacement = order.location_id.logo
+
                 # location = self.env['stock.location'].search([('id', '=', order.location_id.id)])
             else:
                 order = self.env['purchase.order'].search([('name', '=', origin)], limit=1)
 
                 if order.dest_address_id:
                     emplacement = order.dest_address_id.name
-                    telephone_emplacement = order.dest_address_id.x_studio_field_63rEV
+
+                    if order.dest_address_id.x_studio_field_63rEV:
+                        telephone_emplacement = order.dest_address_id.x_studio_field_63rEV
+
+                    if order.dest_address_id.telephone:
+                        telephone_emplacement = order.dest_address_id.telephone
+
+                    # if order.dest_address_id.logo:
+                    #     logo_emplacement = order.location_id.logo
 
                 if order.picking_type_id.default_location_dest_id:
                     emplacement = order.picking_type_id.default_location_dest_id.name
                     telephone_emplacement = order.picking_type_id.default_location_dest_id.x_studio_field_63rEV
 
+        # return {'lieu': emplacement, 'telephone': telephone_emplacement, 'logo': logo_emplacement}
         return {'lieu': emplacement, 'telephone': telephone_emplacement}
 
     @api.multi
