@@ -10,7 +10,7 @@
         Génération de Code Barre Suivant Le Type des Règles de Nomenclature
     """,
 
-    'author': "SODIAL SA",
+    'author': "TOBIN FROST",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing

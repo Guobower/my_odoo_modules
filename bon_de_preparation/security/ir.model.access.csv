@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_bon_de_preparation_bon_de_preparation,bon_de_preparation.bon_de_preparation,model_bon_de_preparation_bon_de_preparation,,1,0,0,0

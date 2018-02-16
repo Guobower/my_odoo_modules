@@ -1,0 +1,5 @@
+"C:\Program Files (x86)\Odoo 11.0e\python\python.exe" "C:\Program Files (x86)\Odoo 11.0e\server\odoo-bin" scaffold test2 "C:\Program Files (x86)\Odoo 11.0e\server\addons"
+
+"C:\Program Files (x86)\Odoo 11.0e\python\python.exe" "C:\Program Files (x86)\Odoo 11.0e\server\odoo-bin" scaffold "barcode generator" "C:\Users\USER\Documents\SandBox-Odoo"
+
+"C:\Program Files (x86)\Odoo 11.0e\python\python.exe" "C:\Program Files (x86)\Odoo 11.0e\server\odoo-bin" scaffold "module name" "C:\Users\USER\Documents\SandBox-Odoo"
