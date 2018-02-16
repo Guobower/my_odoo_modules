@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_factures_mm_factures_mm,factures_mm.factures_mm,model_factures_mm_factures_mm,,1,0,0,0
