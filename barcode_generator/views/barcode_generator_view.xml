@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Record Zone -->
+
+    <record model="ir.ui.view" id="barecode_generation_list_view">
+        <field name="name">barcode_register.form</field>
+        <field name="model">barcode_generator.barecode_register</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Codes Barre">
+                <field name="name"/>
+                <field string="Date" name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="lot_barecode_generation_list_view">
+        <field name="name">lot_barcode_register.form</field>
+        <field name="model">barcode_generator.lot_barecode_register</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des Lots de Codes Barre">
+                <field name="name"/>
+                <field string="Date" name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="barecode_generation_form_view">
+        <field name="name">barcode_register.form</field>
+        <field name="model">barcode_generator.barecode_register</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire Registre Code Barre">
+                <sheet>
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <field name="type"/>
+                        <field name="barcode"/>
+                        <field name="pattern" invisible="1"/>
+                        <field name="locked" invisible="1"/>
+                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer Code Barre" class="oe_highlight" type="object" name="generate_record_barcode" />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="barcode_generation_lot_form_view">
+        <field name="name">lot_barcode_register.list</field>
+        <field name="model">barcode_generator.lot_barecode_register</field>
+        <field name="arch" type="xml">
+            <form string="Formulaire Lot Code Barre">
+                <sheet>
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <field string="Nombre de Code-barres" name="nombre"/>
+                        <field name="type"/>
+                        <field name="pattern" invisible="1"/>
+                        <field name="locked" invisible="1"/>
+                        <!--<field name="barcode_ids" invisible="[('barcode_ids', '=', [])]"/>-->
+                        <field name="barcode_ids" />
+                        <button attrs="{'invisible':[('locked', '!=', False)]}" string="Générer des Codes Barre" class="oe_highlight" type="object" name="generate_record_barcode" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="barecode_generation_list_action">
+        <field name="name">Code Barre</field>
+        <field name="res_model">barcode_generator.barecode_register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Créer un code barre
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="lot_barecode_generation_list_action">
+        <field name="name">Lot de Code Barre</field>
+        <field name="res_model">barcode_generator.lot_barecode_register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Créer un lot de code barre
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item Zone -->
+
+    <menuitem id="barecode_generator_main_menu" name="Générateur de Code Barre"/>
+    <menuitem id="barecode_generator_menu" name="Génération" parent="barecode_generator_main_menu" action="barecode_generation_list_action"/>
+    <menuitem id="unitary_barecode_generator_menu" name="Génération unitaire" parent="barecode_generator_menu" action="barecode_generation_list_action"/>
+    <menuitem id="lot_barecode_generator_menu" name="Génération par lot" parent="barecode_generator_menu" action="lot_barecode_generation_list_action"/>
+
+
+</odoo>
